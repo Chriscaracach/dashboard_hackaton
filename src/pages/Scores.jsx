@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useTeams } from '../hooks/useTeams'
 import './Scores.css'
 
@@ -94,8 +93,7 @@ function TeamCard({ team, rank, maxVal }) {
 }
 
 export default function Scores() {
-  const { teams } = useTeams()
-  const navigate = useNavigate()
+  const { teams, loading, error } = useTeams()
 
   const sorted = [...teams].sort((a, b) => b.valuation - a.valuation)
   const maxVal = sorted[0]?.valuation ?? 1
@@ -107,12 +105,11 @@ export default function Scores() {
     <div className="scores-page">
       {/* Top bar */}
       <header className="top-bar">
-        <div className="top-bar-left">
-        </div>
+        <div className="top-bar-left" />
         <Clock />
-        <button className="nav-btn" onClick={() => navigate('/edit')}>
-          Editar Puntajes
-        </button>
+        <div className="top-bar-right">
+          {error && <span className="fetch-error">⚠ {error}</span>}
+        </div>
       </header>
 
       {/* Ticker */}
@@ -149,10 +146,10 @@ export default function Scores() {
 
       {/* Cards */}
       <main className="board">
-        {sorted.length === 0 ? (
-          <div className="empty-state">
-            Aún no hay equipos. <button className="link-btn" onClick={() => navigate('/edit')}>Agregar equipos</button>
-          </div>
+        {loading ? (
+          <div className="empty-state">Cargando datos…</div>
+        ) : sorted.length === 0 ? (
+          <div className="empty-state">Aún no hay equipos registrados.</div>
         ) : (
           sorted.map((team, i) => (
             <TeamCard key={team.id} team={team} rank={i + 1} maxVal={maxVal} />

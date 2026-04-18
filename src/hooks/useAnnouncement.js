@@ -1,20 +1,18 @@
 import { useState, useEffect, useCallback } from 'react'
 import { fetchData } from '../lib/github'
 
-const DEFAULT_TEAMS = []
+const DEFAULT_TEXT = ''
 
-export function useTeams() {
-  const [teams, setTeams] = useState(DEFAULT_TEAMS)
+export function useAnnouncement() {
+  const [announcement, setAnnouncement] = useState(DEFAULT_TEXT)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   const load = useCallback(async () => {
     try {
       const data = await fetchData()
-      setTeams(data.teams ?? DEFAULT_TEAMS)
-      setError(null)
-    } catch (err) {
-      setError(err.message)
+      setAnnouncement(data.announcement ?? DEFAULT_TEXT)
+    } catch {
+      // keep current value on error
     } finally {
       setLoading(false)
     }
@@ -22,9 +20,9 @@ export function useTeams() {
 
   useEffect(() => {
     load()
-    const id = setInterval(load, 30_000)
+    const id = setInterval(load, 10_000)
     return () => clearInterval(id)
   }, [load])
 
-  return { teams, loading, error }
+  return { announcement, loading }
 }

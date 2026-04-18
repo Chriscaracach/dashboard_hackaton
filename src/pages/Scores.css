@@ -380,3 +380,16 @@
   text-transform: uppercase;
   background: #040a12;
 }
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  justify-content: flex-end;
+}
+
+.fetch-error {
+  font-size: 0.7rem;
+  color: #ff4444;
+  letter-spacing: 0.5px;
+}

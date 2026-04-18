@@ -1,0 +1,10 @@
+{
+  "teams": [
+    { "id": 1, "name": "Alpha Ventures", "ticker": "ALPH", "valuation": 1250000 },
+    { "id": 2, "name": "Beta Capital", "ticker": "BETA", "valuation": 980000 },
+    { "id": 3, "name": "Gamma Squad", "ticker": "GMMA", "valuation": 1540000 },
+    { "id": 4, "name": "Delta Force", "ticker": "DLTA", "valuation": 720000 },
+    { "id": 5, "name": "Epsilon Group", "ticker": "EPSN", "valuation": 1100000 }
+  ],
+  "announcement": "¡Bienvenidos al Hackathon Exchange!"
+}
