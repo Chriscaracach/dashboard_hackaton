@@ -20,7 +20,7 @@ export function useAnnouncement() {
 
   useEffect(() => {
     load()
-    const id = setInterval(load, 10_000)
+    const id = setInterval(load, 5_000)
     return () => clearInterval(id)
   }, [load])
 
