@@ -101,6 +101,8 @@ export default function Scores() {
   const total = teams.reduce((sum, t) => sum + t.valuation, 0)
   const leader = sorted[0]
 
+  console.log(error)
+
   return (
     <div className="scores-page">
       {/* Top bar */}
